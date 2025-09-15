@@ -1,27 +1,26 @@
-[project]
+[tool.poetry]
 name = "sdinev-web"
 version = "0.1.0"
 description = "SDinev Web"
-authors = [
-    {name = "dinevsg",email = "dinevs@icloud.com"}
-]
-license = {text = "MIT"}
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "django (>=5.1.7,<6.0.0)",
-    "pillow (>=11.1.0,<12.0.0)",
-    "django-browser-reload (>=1.18.0,<2.0.0)",
-    "django-ckeditor (>=6.7.2,<7.0.0)",
-    "gunicorn (>=23.0.0,<24.0.0)",
-    "whitenoise (>=6.9.0,<7.0.0)",
-    "django-widget-tweaks (>=1.5.0,<2.0.0)",
-    "djangorestframework (>=3.16.0,<4.0.0)",
-    "django-cors-headers (>=4.7.0,<5.0.0)",
-    "django-taggit (>=6.1.0,<7.0.0)",
-    "beautifulsoup4 (>=4.13.5,<5.0.0)",
-]
+authors = ["dinevsg <dinevs@icloud.com>"]
+license = "MIT"
 
+[tool.poetry.dependencies]
+python = "^3.13"
+django = ">=5.1.7,<6.0.0"
+pillow = ">=11.1.0,<12.0.0"
+django-browser-reload = ">=1.18.0,<2.0.0"
+django-ckeditor = ">=6.7.2,<7.0.0"
+gunicorn = ">=23.0.0,<24.0.0"
+whitenoise = ">=6.9.0,<7.0.0"
+django-widget-tweaks = ">=1.5.0,<2.0.0"
+djangorestframework = ">=3.16.0,<4.0.0"
+django-cors-headers = ">=4.7.0,<5.0.0"
+django-taggit = ">=6.1.0,<7.0.0"
+beautifulsoup4 = ">=4.13.5,<5.0.0"
+
+[tool.poetry.dev-dependencies]
+# add dev dependencies if needed
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
