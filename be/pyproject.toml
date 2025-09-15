@@ -26,13 +26,3 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-# your existing name/version etc.
-
-[tool.poetry.dependencies]
-python = "^3.13"
-# your other deps
-
-[tool.poetry.settings]
-package-mode = false
