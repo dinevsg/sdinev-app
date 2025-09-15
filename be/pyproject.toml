@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "sdinev-web"
+name = "sdinevweb"
 version = "0.1.0"
 description = "SDinev Web"
 authors = ["dinevsg <dinevs@icloud.com>"]
