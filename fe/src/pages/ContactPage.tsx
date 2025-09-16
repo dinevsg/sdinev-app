@@ -3,6 +3,7 @@ export default function ContactPage() {
     <main>
       <h1>Contact Us</h1>
       <p>Send us a message!</p>
+      <p>Hehe</p>
     </main>
   );
 }
