@@ -41,13 +41,10 @@ export async function generateStaticParams() {
   return allParams;
 }
 
+type BlogPostPageParams = Promise<{ category_slug: string; slug: string }>;
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { category_slug: string; slug: string };
-}) {
-  const { category_slug, slug } = params;  
+export default async function BlogPostPage(props: { params: BlogPostPageParams }) {
+  const { category_slug, slug } = await props.params;
   const res = await fetch(
    `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/?format=json`,
     { cache: 'no-store' } // disable caching for dev
