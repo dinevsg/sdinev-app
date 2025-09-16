@@ -52,8 +52,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sdweb.urls'
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",  # Next.js dev server
+# ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Next.js dev server
+    "https://fe-4t37w.ondigitalocean.app"
 ]
 
 TEMPLATES = [
@@ -125,7 +128,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / 'templates',
+    BASE_DIR / 'static',
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
