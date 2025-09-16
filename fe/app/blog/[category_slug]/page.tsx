@@ -17,6 +17,19 @@ interface BlogPost {
   get_absolute_url: string;
 }
 
+
+// STATIC EXPORT SUPPORT
+// ---------------------------
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`);
+  const categories: { slug: string }[] = await res.json();
+
+  return categories.map((cat) => ({
+    category_slug: cat.slug,
+  }));
+}
+
+
 type BlogCategoryPageParams = Promise<{ category_slug: string }>;
 
 export default async function BlogCategoryPage(props: { params: BlogCategoryPageParams }) {
