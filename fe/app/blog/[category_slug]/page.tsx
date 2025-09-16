@@ -17,12 +17,10 @@ interface BlogPost {
   get_absolute_url: string;
 }
 
-export default async function BlogCategoryPage({
-  params,
-}: {
-  params: { category_slug: string };
-}) {
-  const { category_slug } = params;
+type BlogCategoryPageParams = Promise<{ category_slug: string }>;
+
+export default async function BlogCategoryPage(props: { params: BlogCategoryPageParams }) {
+  const { category_slug } = await props.params;
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/?format=json`, {
     next: { revalidate: 10 },
