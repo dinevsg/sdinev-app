@@ -16,12 +16,16 @@ category: string;
 export async function generateStaticParams() {
   const allParams: { category_slug: string; slug: string }[] = [];
 
-   const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`);
+  const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`, {
+    cache: "no-store",
+  });
   if (!categoriesRes.ok) return allParams;
   const categories: { slug: string }[] = await categoriesRes.json();
 
   for (const cat of categories) {
-    const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${cat.slug}/?format=json`);
+    const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${cat.slug}/?format=json`, {
+      cache: "no-store",
+    });
     if (!postsRes.ok) continue;
     const posts: { slug: string }[] = await postsRes.json();
 
