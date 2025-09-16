@@ -10,6 +10,27 @@ category: string;
   read_time: number;
 }
 
+// ----------------------------
+// REQUIRED FOR STATIC EXPORT
+// ----------------------------
+export async function generateStaticParams() {
+  // Fetch all categories and all posts for each category
+  const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`);
+  const categories: { slug: string }[] = await categoriesRes.json();
+
+  const allParams: { category_slug: string; slug: string }[] = [];
+
+  for (const cat of categories) {
+    const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${cat.slug}/?format=json`);
+    const posts: { slug: string }[] = await postsRes.json();
+
+    posts.forEach((post) => {
+      allParams.push({ category_slug: cat.slug, slug: post.slug });
+    });
+  }
+
+  return allParams;
+}
 
 
 export default async function BlogPostPage({
