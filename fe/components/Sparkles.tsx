@@ -143,13 +143,19 @@ export function Sparkles({
         },
       },
     },
+//     detectRetina: true,
+//   };
+//   return (
+//     isReady && (
+//       <Particles id={id} 
+//       // @ts-nocheck
+//       options={defaultOptions} className={className} />
+//     )
+//   );
+// }
     detectRetina: true,
+    ...options, // allow custom overrides safely
   };
-  return (
-    isReady && (
-      <Particles id={id} 
-      // @ts-nocheck
-      options={defaultOptions} className={className} />
-    )
-  );
+
+  return isReady ? <Particles id={id} options={defaultOptions} className={className} /> : null;
 }
