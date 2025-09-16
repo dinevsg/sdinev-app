@@ -17,7 +17,7 @@ export async function generateStaticParams() {
   const allParams: { category_slug: string; slug: string }[] = [];
 
   try {
-    const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`);
+    const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/?format=json`);
     if (!categoriesRes.ok) return allParams;
     const categories: { slug: string }[] = await categoriesRes.json();
 
@@ -49,7 +49,7 @@ export default async function BlogPostPage({
 }) {
   const { category_slug, slug } = params;  
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/`,
+   `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/?format=json`,
     { cache: 'no-store' } // disable caching for dev
   );
 
