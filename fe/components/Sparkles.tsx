@@ -241,7 +241,7 @@ export function Sparkles({
       color: { value: color },
       move: {
         enable: true,
-        direction,
+        direction: direction as any,
         speed: { min: minSpeed || speed / 130, max: speed },
         straight: true,
       },
