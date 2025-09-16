@@ -19,7 +19,7 @@ export default async function BlogPostPage({
 }) {
   const { category_slug, slug } = await params;  
   const res = await fetch(
-    `http://localhost:8000/api/blog/${category_slug}/${slug}/`,
+    `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/`,
     { cache: 'no-store' } // disable caching for dev
   );
 

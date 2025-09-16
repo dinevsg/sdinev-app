@@ -28,7 +28,7 @@ export default function BlogCategoryPage({ params }: BlogCategoryPageProps) {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/blog/${category_slug}/?format=json`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/?format=json`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();

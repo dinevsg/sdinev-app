@@ -42,19 +42,19 @@ export default function Example() {
                     <ButtonHoverUnderLine text="Contact" href="/contact" />
                 </PopoverGroup>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="#" className="text-sm/6 font-semibold">
+                    <Link href="#" className="text-sm/6 font-semibold">
                         Log in <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    </Link>
                 </div>
             </nav>
             <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
                 <div className="fixed inset-0 z-50">
     <DialogPanel className="fixed inset-x-0 z-10 max-h-svh overflow-y-auto bg-bg/90 border-b border-gray-700 rounded-b-3xl  backdrop-blur-sm container px-6 py-6 font-normal text-center flex flex-col">
       <div className="flex items-center justify-between mb-6">
-        <a href="#" className="text-2xl font-bold">
+        <Link href="#" className="text-2xl font-bold">
           <span>SDinev</span>
           <span className="text-3xl text-indigo-500">.</span>
-        </a>
+        </Link>
         <button
           type="button"
           onClick={() => setMobileMenuOpen(false)}
@@ -67,29 +67,29 @@ export default function Example() {
 
       <ul className="space-y-2 text-xl font-medium">
         <li className="py-4">
-          <a href="/about" className="block w-full">
+          <Link href="/about" className="block w-full">
             About
-          </a>
+          </Link>
         </li>
         <li className="py-4 border-t border-gray-700">
-          <a href="/certifications" className="block w-full">
+          <Link href="/certifications" className="block w-full">
             Certification
-          </a>
+          </Link>
         </li>
         <li className="py-4 border-t border-gray-700">
-          <a href="/projects" className="block w-full">
+          <Link href="/projects" className="block w-full">
             Projects
-          </a>
+          </Link>
         </li>
         <li className="py-4 border-t border-gray-700">
-          <a href="/blog" className="block w-full">
+          <Link href="/blog" className="block w-full">
             Blog
-          </a>
+          </Link>
         </li>
         <li className="py-4 border-t border-gray-700">
-          <a href="/contacts" className="block w-full">
+          <Link href="/contacts" className="block w-full">
             Contact
-          </a>
+          </Link>
         </li>
         <li className="mt-4 w-full">
           {/* <a

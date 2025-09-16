@@ -16,7 +16,7 @@ import {
 
 
 // async function fetchCertifications(): Promise<Certification[]> {
-//   const res = await fetch("http://localhost:8000/api/certifications/");
+//   const res = await fetch("`${process.env.NEXT_PUBLIC_API_URL}/certifications/");
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch certifications");
 //   }
@@ -48,7 +48,7 @@ const [certifications, setCertifications] = useState<Certification[]>([]);
   useEffect(() => {
     const fetchCertifications = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/certifications/");
+        const res = await fetch("`${process.env.NEXT_PUBLIC_API_URL}/certifications/");
         if (!res.ok) throw new Error("Failed to fetch certifications");
         const data = await res.json();
         setCertifications(data);
