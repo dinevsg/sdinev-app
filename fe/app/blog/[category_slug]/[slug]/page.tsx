@@ -45,9 +45,9 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ category_slug: string; slug: string }>;
+  params: { category_slug: string; slug: string };
 }) {
-  const { category_slug, slug } = await params;  
+  const { category_slug, slug } = params;  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/`,
     { cache: 'no-store' } // disable caching for dev
