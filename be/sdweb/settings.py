@@ -53,7 +53,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'sdweb.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Next.js dev server
+    "http://localhost:5173",  # Next.js dev server
 ]
 
 TEMPLATES = [
