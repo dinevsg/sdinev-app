@@ -14,19 +14,28 @@ category: string;
 // REQUIRED FOR STATIC EXPORT
 // ----------------------------
 export async function generateStaticParams() {
-  // Fetch all categories and all posts for each category
-  const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`);
-  const categories: { slug: string }[] = await categoriesRes.json();
-
   const allParams: { category_slug: string; slug: string }[] = [];
 
-  for (const cat of categories) {
-    const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${cat.slug}/?format=json`);
-    const posts: { slug: string }[] = await postsRes.json();
+  try {
+    const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`);
+    if (!categoriesRes.ok) return allParams;
+    const categories: { slug: string }[] = await categoriesRes.json();
 
-    posts.forEach((post) => {
-      allParams.push({ category_slug: cat.slug, slug: post.slug });
-    });
+    for (const cat of categories) {
+      try {
+        const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${cat.slug}/?format=json`);
+        if (!postsRes.ok) continue;
+        const posts: { slug: string }[] = await postsRes.json();
+
+        posts.forEach((post) => {
+          allParams.push({ category_slug: cat.slug, slug: post.slug });
+        });
+      } catch (err) {
+        console.warn(`Failed to fetch posts for category ${cat.slug}:`, err);
+      }
+    }
+  } catch (err) {
+    console.warn('Failed to fetch categories:', err);
   }
 
   return allParams;
