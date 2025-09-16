@@ -17,15 +17,14 @@ interface BlogPost {
   get_absolute_url: string;
 }
 
-// interface BlogCategoryPageProps {
-//   params: { category_slug: string };
-// }
+type BlogCategoryPageProps = {
+  params: {
+    category_slug: string;
+  };
+};
 
-export default async function BlogCategoryPage({
-  params,
-}: {
-  params: { category_slug: string };
-}) {
+
+export default async function BlogCategoryPage({ params }: BlogCategoryPageProps) {
   const { category_slug } = params;
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/?format=json`, {
