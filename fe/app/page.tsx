@@ -76,7 +76,7 @@ const Home = () => {
 
 
 useEffect(() => {
-  fetch('`${process.env.NEXT_PUBLIC_API_URL}/certifications/latest/?format=json')
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/certifications/latest/?format=json`)
     .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       return res.json();
@@ -86,7 +86,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-    fetch('`${process.env.NEXT_PUBLIC_API_URL}/blog/latest/?format=json')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/latest/?format=json`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();
@@ -96,7 +96,7 @@ useEffect(() => {
   }, []);
 
    useEffect(() => {
-    fetch("`${process.env.NEXT_PUBLIC_API_URL}/projects/latest/?format=json")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/latest/?format=json`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
         return res.json()

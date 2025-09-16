@@ -21,17 +21,18 @@ interface BlogCategoryPageProps {
   params: { category_slug: string };
 }
 
-export default async function BlogCategoryPage({ params }: BlogCategoryPageProps) {
+export default async function BlogCategoryPage({
+  params,
+}: {
+  params: { category_slug: string };
+}) {
   const { category_slug } = params;
 
-  // Server-side fetch using fetch() with NEXT_PUBLIC_API_URL or directly your backend URL
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/?format=json`, {
-    next: { revalidate: 10 } // optional ISR
+    next: { revalidate: 10 },
   });
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch blog posts for category ${category_slug}`);
-  }
+  if (!res.ok) throw new Error(`Failed to fetch blog posts for category ${category_slug}`);
 
   const blogPosts: BlogPost[] = await res.json();
   const featuredPost = blogPosts[0];

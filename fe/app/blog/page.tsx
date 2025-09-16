@@ -23,7 +23,7 @@ export default  function BlogPage() {
 
 const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
     useEffect(() => {
-        fetch('`${process.env.NEXT_PUBLIC_API_URL}/blog/latest/?format=json')
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/latest/?format=json`)
           .then((res) => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
