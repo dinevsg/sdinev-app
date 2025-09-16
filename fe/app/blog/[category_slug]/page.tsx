@@ -17,9 +17,9 @@ interface BlogPost {
   get_absolute_url: string;
 }
 
-interface BlogCategoryPageProps {
-  params: { category_slug: string };
-}
+// interface BlogCategoryPageProps {
+//   params: { category_slug: string };
+// }
 
 export default async function BlogCategoryPage({
   params,
