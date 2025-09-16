@@ -37,28 +37,33 @@ category: string;
 
 
 export async function generateStaticParams() {
-  // Fetch all categories
-  const categoriesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories?format=json`, {
+  // Fetch all posts
+  const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, {
     cache: "no-store", // always fetch fresh data
   });
-  if (!categoriesRes.ok) return [];
 
-  const categories: { slug: string }[] = await categoriesRes.json();
+  if (!postsRes.ok) return [];
 
-  // Fetch all posts for each category concurrently
+  const posts: { slug: string; category_slug: string }[] = await postsRes.json();
+
+  // Get unique category slugs
+  const categories = [...new Set(posts.map((post) => post.category_slug))];
+
+  // Fetch posts per category concurrently
   const allParams = await Promise.all(
-    categories.map(async (cat) => {
-      const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${cat.slug}/?format=json`, {
+    categories.map(async (catSlug) => {
+      const catPostsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${catSlug}/`, {
         cache: "no-store",
       });
-      if (!postsRes.ok) return [];
 
-      const posts: { slug: string }[] = await postsRes.json();
-      return posts.map((post) => ({ category_slug: cat.slug, slug: post.slug }));
+      if (!catPostsRes.ok) return [];
+
+      const catPosts: { slug: string }[] = await catPostsRes.json();
+      return catPosts.map((post) => ({ category_slug: catSlug, slug: post.slug }));
     })
   );
 
-  // Flatten the array of arrays into a single array
+  // Flatten array of arrays into a single array
   return allParams.flat();
 }
 
