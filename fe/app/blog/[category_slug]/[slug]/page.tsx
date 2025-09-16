@@ -64,17 +64,17 @@ export async function generateStaticParams() {
   );
 
   // Flatten array of arrays into a single array
-  return allParams.flat();
+  return allParams.filter(Boolean).flat();
 }
 
 
-type BlogPostPageParams =  Promise<{
+type BlogPostPageParams = {
   category_slug: string;
   slug: string;
-}>;
+};
+export default async function BlogPostPage(props: { params: BlogPostPageParams }) {
+  const { category_slug, slug } = props.params;
 
-export default async function BlogPostPage( props: { params: BlogPostPageParams }) {
-  const { category_slug, slug } = await props.params; // no await needed
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/?format=json`,
