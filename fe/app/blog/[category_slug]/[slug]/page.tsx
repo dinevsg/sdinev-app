@@ -63,13 +63,13 @@ export async function generateStaticParams() {
 }
 
 
-type BlogPostPageParams = {
+type BlogPostPageParams =  Promise<{
   category_slug: string;
   slug: string;
-};
+}>;
 
 export default async function BlogPostPage( props: { params: BlogPostPageParams }) {
-  const { category_slug, slug } = props.params; // no await needed
+  const { category_slug, slug } = await props.params; // no await needed
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/blog/${category_slug}/${slug}/?format=json`,
