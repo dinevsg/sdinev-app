@@ -69,6 +69,7 @@ media/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.prod
 
 # --- OS / IDE ---
 .DS_Store

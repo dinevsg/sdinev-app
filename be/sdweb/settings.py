@@ -1,15 +1,18 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file
+load_dotenv()
+
 SECRET_KEY = os.environ.get("SECRET_KEY")
-# SECRET_KEY="django-insecure-6538$@y^7#_4xi8lmr)r6)$75cmxqv5zhu%37y+(#ex5pv%8cm"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
-# DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(", ")
 
 
 # Application definition
@@ -52,11 +55,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sdweb.urls'
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",  # Next.js dev server
-# ]
 CORS_ALLOWED_ORIGINS = [
-    "https://fe-4t37w.ondigitalocean.app"
+    "https://fe-4t37w.ondigitalocean.app", # DigitalOcean App Platform
+    "http://localhost:5173", # React dev server
 ]
 
 TEMPLATES = [
@@ -79,14 +80,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sdweb.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# if postgres is not configured, use sqlite
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get("DB_ENGINE", "django.db.backends.sqlite3"),
+        'NAME': os.environ.get("DB_NAME", BASE_DIR / "db.sqlite3"),
+        'USER': os.environ.get("DB_USER", ""),
+        'PASSWORD': os.environ.get("DB_PASSWORD", ""),
+        'HOST': os.environ.get("DB_HOST", "localhost"),
+        'PORT': os.environ.get("DB_PORT", "5432"),
+        "OPTIONS": {
+            "sslmode": "require"
+        }
     }
 }
 
