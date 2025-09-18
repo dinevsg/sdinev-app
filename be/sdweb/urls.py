@@ -15,7 +15,7 @@ handler404 = custom_404_view
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('admin', admin.site.urls),
-    path('', HomepageView.as_view(), name='homepage'),
+    # path('', HomepageView.as_view(), name='homepage'),
 
 
     # Add your API routes here under 'api/' path to keep it separate from your normal views
@@ -40,4 +40,7 @@ else:
     urlpatterns += [
         path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
-    
+
+# urlpatterns += [
+# path('', HomepageView.as_view(template_name='index.html')),  # serves React
+# ]
