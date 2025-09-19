@@ -31,7 +31,7 @@ function AccordionTrigger({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
   return (
-    <AccordionPrimitive.Header className="flex text-sm xl:text-lg">
+    <AccordionPrimitive.Header className="flex text-lg text-neutral-main xl:text-lg">
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
@@ -55,7 +55,7 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-zinc-400 text-sm xl:text-base"
+      className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-neutral-secondary text-md xl:text-base"
       {...props}
     >
       <div className={cn("pt-0 pb-4", className)}>{children}</div>

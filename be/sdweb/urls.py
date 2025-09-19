@@ -2,7 +2,6 @@ from django.conf.urls import handler404
 from django.shortcuts import render
 from django.contrib import admin
 from django.urls import path, include
-from apps.vanilla.views import HomepageView
 from django.conf import settings  # Import settings from django.conf
 from django.conf.urls.static import static # Import static from django.conf.urls.static
 
@@ -14,18 +13,13 @@ handler404 = custom_404_view
 
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
-    path('admin', admin.site.urls),
-    # path('', HomepageView.as_view(), name='homepage'),
-
+    path('admin/', admin.site.urls),
 
     # Add your API routes here under 'api/' path to keep it separate from your normal views
     path('api/certifications/', include('apps.certification.api_urls')),
     path('api/blog/', include('apps.blog.api_urls', namespace="blog")),
     path('api/projects/', include('apps.projects.api_urls', namespace="projects")),
-
-    # path('', include('apps.hub.urls')),
-    path('contact', include('apps.vanilla.urls'))
-    # path('yes/', YesView.as_view(), name='yes'),
+    path("api/vanilla/", include("apps.vanilla.api_urls", namespace="vanilla")),
 
 ]
 
@@ -40,7 +34,3 @@ else:
     urlpatterns += [
         path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
-
-# urlpatterns += [
-# path('', HomepageView.as_view(template_name='index.html')),  # serves React
-# ]

@@ -148,7 +148,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-APPEND_SLASH = False
+# APPEND_SLASH = False
 
 CKEDITOR_CONFIGS = {
     "default": {
@@ -170,3 +170,13 @@ CKEDITOR_CONFIGS = {
         "allowedContent": True,  # allow all HTML tags
     }
 }
+
+
+
+# Email backend
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+ANYMAIL = {
+    "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY"),
+}
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
+EMAIL_TIMEOUT = 10

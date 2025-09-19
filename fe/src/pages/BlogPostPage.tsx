@@ -7,6 +7,7 @@ interface BlogPost {
   category: string;
   category_slug: string;
   content: string;
+  content_html: string;
   published_by: string;
   published_at: string;
   read_time: number;
@@ -39,7 +40,7 @@ export default function BlogPostPage() {
   return (
     <section className="py-2 xl:py-12">
       <div className="max-w-7xl mx-auto py-12 px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-neutral-main mb-4">{post.title}</h1>
+        <h1 className="text-2xl lg:text-4xl font-bold text-neutral-main mb-4">{post.title}</h1>
         <Link
           to={`/blog/${post.category_slug}`}
           className="flex w-fit bg-indigo-500/30 text-indigo-300 hover:bg-indigo-500 hover:text-neutral-main transition items-center p-3 leading-none rounded-full text-sm font-semibold"
@@ -55,13 +56,16 @@ export default function BlogPostPage() {
           })}{" "}
           · {post.read_time} {post.read_time === 1 ? "min" : "mins"} read
         </div>
-        <article
-          className="px-6 prose prose-neutral dark:prose-invert mt-12 text-lg list-disc list-outside [&>ul]:list-disc [&>ol]:list-decimal
-          [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-600
-          dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-400"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+       <article
+  className="px-2 prose prose-neutral dark:prose-invert mt-12 text-md lg:text-lg
+             [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:ml-10
+             [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:ml-10
+             [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-600
+             dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-400"
+  dangerouslySetInnerHTML={{ __html: post.content_html }}
+/>
       </div>
     </section>
+
   );
 }

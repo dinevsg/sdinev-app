@@ -5,10 +5,10 @@ export default function Footer() {
   return (
     <section className="border-t border-gray-700">
       <div className="container flex flex-col items-center px-8 lg:py-6 py-8 mx-auto max-w-7xl sm:flex-row">
-        <a href="/" className="text-2xl font-bold flex items-center gap-1">
-          <span>SDinev</span>
-          <span className="text-2xl font-black text-indigo-600">.</span>
-        </a>
+        <a href="/" className="flex items-center gap-1 font-bold px-4">
+                <span className="text-2xl">SDinev</span>
+                <span className="text-5xl text-indigo-500 -mt-4 -ml-1">.</span>
+            </a>
 
         <p className="mt-4 text-sm sm:ml-4 sm:pl-4 sm:border-l sm:border-neutral-primary sm:mt-1">
           &copy; 2025
