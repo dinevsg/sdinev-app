@@ -33,14 +33,6 @@ interface Certification {
 }
 
 export default  function CertificationsPage() {
-// let certifications: Certification[] = [];
-
-//   try {
-//     certifications = await fetchCertifications();
-//   } catch (error) {
-//     console.error(error);
-//   }
-
 
 const [certifications, setCertifications] = useState<Certification[]>([]);
   const [selectedProvider, setSelectedProvider] = useState<string>("all");

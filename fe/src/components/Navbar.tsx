@@ -41,11 +41,11 @@ export default function Navbar() {
         </PopoverGroup>
 
         {/* Desktop right side */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm/6 font-semibold">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
-        </div>
+        </div> */}
       </nav>
 
       {/* Mobile menu dialog */}

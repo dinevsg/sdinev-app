@@ -68,7 +68,7 @@ export default function ContactPage() {
   // Input class helper
   const inputClass = (hasError: boolean) =>
     `w-full rounded-2xl border px-5 py-3 bg-transparent text-neutral-main focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${
-      hasError ? "border-red-500 focus:ring-red-500" : "border-gray-700"
+      hasError ? "border-rose-400 focus:ring-rose-400 " : "border-gray-700"
     }`;
 
   return (
@@ -86,7 +86,7 @@ export default function ContactPage() {
         <div className="mx-auto w-full max-w-5xl mb-16 xl:mb-4">
           <form onSubmit={handleSubmit} className="-mx-4 flex flex-wrap lg:items-stretch">
             {/* LEFT: stacked inputs */}
-            <div className="w-full px-4 lg:w-1/2 flex flex-col gap-y-4">
+            <div className="w-full px-4 lg:w-1/3 flex flex-col gap-y-4">
               <input
                 id="firstName"
                 name="firstName"
@@ -117,7 +117,7 @@ export default function ContactPage() {
             </div>
 
             {/* RIGHT: Message textarea */}
-            <div className="w-full px-4 mt-6 lg:mt-0 lg:w-1/2 flex">
+            <div className="w-full px-4 mt-6 lg:mt-0 h-64 lg:h-auto lg:w-2/3 flex">
               <textarea
                 id="message"
                 name="message"
@@ -140,7 +140,7 @@ export default function ContactPage() {
 
             {/* STATUS MESSAGE */}
             {status === "error" && (
-              <p className="w-full text-center mt-4 text-red-500 font-semibold animate-pulse">
+              <p className="w-full text-center mt-4 text-rose-400 font-semibold animate-pulse">
                 Oops! Looks like you missed something. Fill all required fields.
               </p>
             )}

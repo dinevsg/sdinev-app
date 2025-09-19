@@ -1,4 +1,3 @@
-// src/pages/BlogCategoryPage.tsx
 'use client'
 
 import React, { useEffect, useState } from "react";
@@ -23,24 +22,20 @@ interface BlogPost {
 export default function BlogCategoryPage() {
   const { category_slug } = useParams<{ category_slug: string }>();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-    const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (!category_slug) return;
 
-    setLoading(true);
     fetch(`${apiUrl}/blog/${category_slug}/?format=json`)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to fetch blog posts for category ${category_slug}`);
         return res.json();
       })
       .then((data: BlogPost[]) => setBlogPosts(data))
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
+      .catch((err) => console.error(err));
   }, [category_slug]);
 
-  if (loading) return <p className="text-center py-10">Loading...</p>;
   if (!blogPosts.length) return <p className="text-center py-10 text-neutral-secondary">No blog posts available in this category.</p>;
 
   const featuredPost = blogPosts[0];

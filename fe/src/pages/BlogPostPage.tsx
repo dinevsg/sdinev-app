@@ -16,26 +16,18 @@ interface BlogPost {
 export default function BlogPostPage() {
   const { category_slug, slug } = useParams<{ category_slug: string; slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-    const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
     
   useEffect(() => {
     if (!category_slug || !slug) return;
 
-    setLoading(true);
     fetch(`${apiUrl}/blog/${category_slug}/${slug}/?format=json`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch blog post");
-        return res.json();
-      })
-      .then((data: BlogPost) => setPost(data))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .then((res) => res.ok ? res.json() : null)
+      .then((data: BlogPost | null) => setPost(data))
+      .catch(() => setPost(null));
   }, [category_slug, slug]);
 
-  if (loading) return <p className="text-center py-10">Loading...</p>;
-  if (error || !post) return <p className="text-center py-10 text-red-500">Blog post not found</p>;
+  if (!post) return null; // render nothing until data is ready
 
   return (
     <section className="py-2 xl:py-12">
@@ -56,16 +48,15 @@ export default function BlogPostPage() {
           })}{" "}
           · {post.read_time} {post.read_time === 1 ? "min" : "mins"} read
         </div>
-       <article
-  className="px-2 prose prose-neutral dark:prose-invert mt-12 text-md lg:text-lg
-             [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:ml-10
-             [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:ml-10
-             [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-600
-             dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-400"
-  dangerouslySetInnerHTML={{ __html: post.content_html }}
-/>
+        <article
+          className="px-2 prose prose-neutral dark:prose-invert mt-12 text-md lg:text-lg
+                     [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:ml-10
+                     [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:ml-10
+                     [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-600
+                     dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-400"
+          dangerouslySetInnerHTML={{ __html: post.content_html }}
+        />
       </div>
     </section>
-
   );
 }

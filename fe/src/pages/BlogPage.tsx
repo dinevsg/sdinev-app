@@ -24,7 +24,7 @@ export default function BlogPage() {
         const apiUrl = import.meta.env.VITE_API_URL;
         
    const [error, setError,] = useState<string | null>(null);
-        const [loading, setLoading] = useState(true);
+        // const [loading, setLoading] = useState(true);
    useEffect(() => {
     const fetchBlogPosts = async () => {
       try {
@@ -35,8 +35,8 @@ export default function BlogPage() {
       } catch (err: any) {
         console.error(err);
         setError(err.message || "Failed to fetch blog posts");
-      } finally {
-        setLoading(false);
+    //   } finally {
+    //     setLoading(false);
       }
     };
     fetchBlogPosts();
@@ -48,6 +48,11 @@ export default function BlogPage() {
   const handleNavigate = (url: string) => {
     navigate(url);
   };
+
+
+  // ✅ no "Loading..." flash here
+  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (!featuredPost && blogPosts.length === 0) return null;
 
     return (
         <section className="py-2 xl:py-12">

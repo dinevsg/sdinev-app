@@ -24,8 +24,6 @@ interface Project {
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -37,15 +35,11 @@ export default function ProjectsPage() {
         setProjects(data);
       } catch (error) {
         console.error(error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchProjects();
   }, [apiUrl]);
-
-  if (loading) return <p className="text-center text-neutral-secondary">Loading projects...</p>;
 
   return (
     <section className="py-2 xl:py-12">
