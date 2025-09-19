@@ -297,21 +297,27 @@ const Home: React.FC = () => {
   </div>
 
   <div className=''>
-    <TabsProvider defaultValue='microsoft'>
+    <TabsProvider defaultValue='all'>
       {/* All certifications */}
       <TabsContent value='all' className='w-full'>
-        <div className="mx-auto grid w-full auto-rows-fr grid-cols-1 items-stretch justify-items-center gap-4 px-6 py-6 sm:py-8 md:py-12 lg:flex lg:px-28">
-          {Array.isArray(certifications) && certifications.map((cert, index) => (
-            <CertificationCard key={cert.id} cert={cert} index={index} />
-          ))}
-        </div>
+        <div className="min-h-[520px] flex flex-col items-center justify-center px-6 py-6 sm:py-8 md:py-12 lg:px-28">
+    {Array.isArray(certifications) && certifications.length > 0 ? (
+      <div className="grid w-full auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch justify-items-center gap-4">
+        {certifications.map((cert, index) => (
+          <CertificationCard key={cert.id} cert={cert} index={index} />
+        ))}
+      </div>
+    ) : (
+      <p className="text-md text-neutral-secondary">No certifications to show.</p>
+    )}
+  </div>
       </TabsContent>
 
       {/* Microsoft certifications */}
       <TabsContent value="microsoft" className="w-full">
         <div className="min-h-[520px] flex flex-col items-center justify-center px-6 py-6 sm:py-8 md:py-12 lg:px-28">
           {Array.isArray(certifications) && certifications.filter(cert => cert.provider.toLowerCase() === 'microsoft').length > 0 ? (
-            <div className="grid w-full auto-rows-fr grid-cols-1 items-stretch justify-items-center gap-4 lg:flex">
+              <div className="grid w-full auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch justify-items-center gap-4">
               {certifications.filter(cert => cert.provider.toLowerCase() === 'microsoft').map((cert, index) => (
                 <CertificationCard key={cert.id} cert={cert} index={index} />
               ))}
@@ -373,7 +379,7 @@ const Home: React.FC = () => {
             <img
               src={featuredPost.picture}
               alt={featuredPost.title}
-              className="group-hover:scale-[1.02] border border-gray-700 w-full h-64 object-cover rounded-2xl shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
+              className="group-hover:scale-[1.02] border border-gray-700 w-full h-64 object-contain rounded-2xl shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
             />
           </a>
         </div>
@@ -409,7 +415,7 @@ const Home: React.FC = () => {
                 <img
                   src={post.picture}
                   alt={post.title}
-                  className="border border-gray-700 w-full h-48 object-cover rounded-2xl group-hover:scale-[1.02] shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
+                  className="border border-gray-700 w-full h-48 object-contain rounded-2xl group-hover:scale-[1.02] shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
                 />
               ) : (
                 <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center rounded-lg">

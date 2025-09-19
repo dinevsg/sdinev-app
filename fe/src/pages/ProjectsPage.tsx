@@ -57,14 +57,14 @@ export default function ProjectsPage() {
           {projects.map((project) => (
             <Card
               key={project.id}
-              className="w-full relative h-84 bg-slate-800/20 rounded-2xl flex flex-col border-gray-700"
+              className="w-full relative h-full bg-slate-800/20 rounded-2xl flex flex-col border-gray-700"
             >
               <div className="flex flex-col flex-grow overflow-hidden rounded-2xl">
                 <CardHeader>
-                  <CardTitle className="w-full font-bold text-sm lg:text-xl text-neutral-main">
+                  <CardTitle className="w-full font-bold text-lg lg:text-xl text-neutral-main">
                     {project.title}
                   </CardTitle>
-                  <CardDescription className="text-sm xl:text-base text-neutral-secondary">
+                  <CardDescription className="text-md xl:text-base text-neutral-secondary">
                     {project.description}
                   </CardDescription>
                 </CardHeader>

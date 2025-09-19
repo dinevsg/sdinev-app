@@ -72,7 +72,7 @@ export default function BlogPage() {
                         <img
                             src={featuredPost.picture}
                             alt={featuredPost.title}
-                            className="group-hover:scale-[1.02] border border-gray-700 w-full h-64 object-cover rounded-2xl shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md cursor-pointer"
+                            className="group-hover:scale-[1.02] border border-gray-700 w-full h-64 object-contain rounded-2xl shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md cursor-pointer"
                             onClick={() =>
                             handleNavigate(`/blog/${featuredPost.category_slug}/${featuredPost.slug}`)
                             }
@@ -126,7 +126,7 @@ export default function BlogPage() {
                   <img
                     src={post.picture || ""}
                     alt={post.title}
-                    className={`border border-gray-700 w-full h-48 object-cover rounded-2xl transition-all duration-200 group-hover:scale-[1.02] shadow-lg group-hover:shadow-gray-700 group-hover:shadow-md ${
+                    className={`border border-gray-700 w-full h-48 object-contain rounded-2xl transition-all duration-200 group-hover:scale-[1.02] shadow-lg group-hover:shadow-gray-700 group-hover:shadow-md ${
                       !post.picture ? "hidden" : ""
                     }`}
                     onClick={() =>

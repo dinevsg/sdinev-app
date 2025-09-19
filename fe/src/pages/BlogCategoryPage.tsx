@@ -61,7 +61,7 @@ export default function BlogCategoryPage() {
                 <img
                   src={featuredPost.picture}
                   alt={featuredPost.title}
-                  className="group-hover:scale-[1.02] border border-gray-700 w-full h-64 object-cover rounded-2xl shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
+                  className="group-hover:scale-[1.02] border border-gray-700 w-full h-64 object-contain rounded-2xl shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
                 />
               </Link>
             </div>
@@ -111,7 +111,7 @@ export default function BlogCategoryPage() {
                     <img
                       src={post.picture}
                       alt={post.title}
-                      className="border border-gray-700 w-full h-48 object-cover rounded-2xl group-hover:scale-[1.02] shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
+                      className="border border-gray-700 w-full h-48 object-contain rounded-2xl group-hover:scale-[1.02] shadow-lg transition-all duration-200 group-hover:shadow-gray-700 group-hover:shadow-md"
                     />
                   ) : (
                     <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center rounded-lg">

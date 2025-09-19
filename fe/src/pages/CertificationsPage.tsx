@@ -138,7 +138,7 @@ const [certifications, setCertifications] = useState<Certification[]>([]);
                     <TabsContent value="all" className="w-full">
                         <div className="min-h-[520px] flex flex-col items-center justify-center">
                             {Array.isArray(certifications) && certifications.filter(cert => cert.provider.toLowerCase() === 'microsoft').length > 0 ? (
-                                <div className="grid w-full auto-rows-fr grid-cols-1 items-stretch justify-items-center gap-4 lg:flex">
+                                <div className="grid w-full auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch justify-items-center gap-4">
                                     {certifications.map((cert, index) => (
                                     <CertificationCard key={cert.id} cert={cert} index={index} />
                                     ))}
@@ -153,7 +153,7 @@ const [certifications, setCertifications] = useState<Certification[]>([]);
                     <TabsContent value="microsoft" className="w-full">
                         <div className="min-h-[520px] flex flex-col items-center justify-center">
                             {Array.isArray(certifications) && certifications.filter(cert => cert.provider.toLowerCase() === 'microsoft').length > 0 ? (
-                                <div className="grid w-full auto-rows-fr grid-cols-1 items-stretch justify-items-center gap-4 lg:flex">
+                                <div className="grid w-full auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch justify-items-center gap-4">
                                     {certifications
                                         .filter(cert => cert.provider.toLowerCase() === 'microsoft')
                                         .map((cert, index) => (
@@ -171,7 +171,7 @@ const [certifications, setCertifications] = useState<Certification[]>([]);
                     <TabsContent value="aws" className="w-full">
                         <div className="min-h-[520px] flex flex-col items-center justify-center px-6 py-6 sm:py-8 md:py-12 lg:px-28">
                             {Array.isArray(certifications) && certifications.filter(cert => cert.provider.toLowerCase() === 'aws').length > 0 ? (
-                                <div className="grid w-full auto-rows-fr grid-cols-1 items-stretch justify-items-center gap-4 lg:flex">
+                                <div className="grid w-full auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch justify-items-center gap-4">
                                     {certifications
                                         .filter(cert => cert.provider.toLowerCase() === 'aws')
                                         .map((cert, index) => (
@@ -188,7 +188,7 @@ const [certifications, setCertifications] = useState<Certification[]>([]);
                     <TabsContent value="github" className="w-full">
                         <div className="min-h-[520px] flex flex-col items-center justify-center px-6 py-6 sm:py-8 md:py-12 lg:px-28">
                             {Array.isArray(certifications) && certifications.filter(cert => cert.provider.toLowerCase() === 'github').length > 0 ? (
-                                <div className="grid w-full auto-rows-fr grid-cols-1 items-stretch justify-items-center gap-4 lg:flex">
+                                <div className="grid w-full auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch justify-items-center gap-4">
                                     {certifications
                                         .filter(cert => cert.provider.toLowerCase() === 'github')
                                         .map((cert, index) => (
