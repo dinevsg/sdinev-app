@@ -1,5 +1,16 @@
 from django.db import models
 
+
+class Provider(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    class Meta:
+        verbose_name = "Provider"
+        verbose_name_plural = "Providers"
+
+    def __str__(self):
+        return self.name
+
 # Create your models here.
 class Certification(models.Model):
     """
@@ -7,15 +18,15 @@ class Certification(models.Model):
     """
     
     title = models.CharField(max_length=255)
-    provider = models.CharField(max_length=100)
+    provider = models.ForeignKey(
+        Provider, 
+        on_delete=models.CASCADE, 
+        related_name="certifications"
+    )
     picture = models.ImageField(upload_to='certification_images/', blank=True, null=True)
     description = models.TextField(max_length=255, blank=True, null=True)
-    credentials_link = models.URLField(max_length=200, null=True, blank=True)
-
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = slugify(self.title)  # Auto-generate slug from title
-    #     super().save(*args, **kwargs)
+    credentials_link = models.URLField(max_length=200, null=True, blank=True)   
 
     def __str__(self):
         return self.title
+    

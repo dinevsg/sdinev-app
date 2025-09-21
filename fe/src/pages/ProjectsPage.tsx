@@ -64,7 +64,7 @@ export default function ProjectsPage() {
                   <CardTitle className="w-full font-bold text-lg lg:text-xl text-neutral-main">
                     {project.title}
                   </CardTitle>
-                  <CardDescription className="text-md xl:text-base text-neutral-secondary">
+                  <CardDescription className="text-md xl:text-base text-neutral-secondary break-words overflow-auto ">
                     {project.description}
                   </CardDescription>
                 </CardHeader>

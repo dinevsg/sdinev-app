@@ -99,13 +99,13 @@ const Home: React.FC = () => {
       <section className="py-12 xl:py-32">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center">
-            <h1 className="text-3xl font-bold tracking-tight xl:text-6xl">
+            <h1 className="text-5xl font-bold tracking-tight xl:text-6xl">
               Aloha, <br />
-              <span className='font-normal'>I'm </span><HyperText className='' as="span">Stanislav Dinev</HyperText>
+              <span className='font-normal text-3xl'>I'm </span><HyperText className='text-3xl' as="span">Stanislav Dinev</HyperText>
             </h1>
             <p className="mt-8 text-md xl:text-lg text-neutral-secondary font-medium">
               A Data Engineer who loves to dive deep into the clouds. <br />
-              Constantly learning, evolving, and pushing boundaries to stay ahead in the ever-changing world of technology.
+              Constantly learning and pushing boundaries to stay ahead in the ever-changing world of technology.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/projects" className="rounded-2xl w-full sm:w-44 bg-indigo-600 hover:bg-indigo-500  px-7 py-3 text-md font-medium shadow-xl transition">
@@ -232,13 +232,11 @@ const Home: React.FC = () => {
         <AnimatedSpan delay={1500} className="text-neutral-main">&gt; echo Loading thoughts...</AnimatedSpan>
         <AnimatedSpan delay={2000} className="text-green-300">✔ Data flows like river</AnimatedSpan>
         <AnimatedSpan delay={2500} className="text-green-300">✔ Code builds the bridge</AnimatedSpan>
-        <AnimatedSpan delay={3000} className="text-green-300">✔ Parsing complexity</AnimatedSpan>
-        <AnimatedSpan delay={3500} className="text-green-300">✔ Connecting dots in the cloud</AnimatedSpan>
-        <AnimatedSpan delay={4000} className="text-green-300">✔ Training intelligence</AnimatedSpan>
-        <AnimatedSpan delay={4500} className="text-green-300">✔ Calibrating neural networks</AnimatedSpan>
-        <AnimatedSpan delay={5000} className="text-green-300">✔ Turning ideas into algorithms</AnimatedSpan>
-        <AnimatedSpan delay={5500} className="text-orange-300">✔ Installing dependencies</AnimatedSpan>
-        <AnimatedSpan delay={6000} className="text-indigo-400">ℹ Unlocking the secrets within: - mind_matrix.py</AnimatedSpan>
+        <AnimatedSpan delay={3000} className="text-green-300">✔ Training intelligence</AnimatedSpan>
+        <AnimatedSpan delay={3500} className="text-green-300">✔ Shipping bugs as a feature</AnimatedSpan>
+        <AnimatedSpan delay={4000} className="text-green-300">✔ Decrypting bad ideas</AnimatedSpan>
+        <AnimatedSpan delay={5000} className="text-green-300">✔ Deploying Sarcasm-as-a-Service</AnimatedSpan>
+        <AnimatedSpan delay={6000} className="text-orange-300">i Hotfixing life choices</AnimatedSpan>
         <TypingAnimation delay={6500} className="text-neutral-main">Project initialization completed.</TypingAnimation>
         <TypingAnimation delay={7000} className="text-neutral-main">Welcome aboard!</TypingAnimation>
       </Terminal>

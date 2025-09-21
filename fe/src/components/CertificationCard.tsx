@@ -47,8 +47,8 @@ const CertificationCard: React.FC<Props> = ({ cert, index }) => (
         </div>
         <span className="text-left">
           <span className="font-bold text-gray-100">Skills measured:</span>{" "}
-          {cert.description.length > 110
-            ? `${cert.description.slice(0, 110)}...`
+          {cert.description.length > 140
+            ? `${cert.description.slice(0, 140)}...`
             : cert.description}
         </span>
       </div>

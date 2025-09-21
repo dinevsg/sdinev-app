@@ -3,6 +3,7 @@ from .models import Certification
 
 class CertificationSerializer(serializers.ModelSerializer):
     picture = serializers.SerializerMethodField()
+    provider = serializers.CharField(source='provider.name', read_only=True)
 
     class Meta:
         model = Certification

@@ -24,7 +24,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="inline-flex items-center justify-center rounded-md px-4"
+            className="inline-flex items-center justify-center rounded-md px-4 focus:outline-none"
           >
             <span className="sr-only">Open main menu</span>
             <IoMenu aria-hidden="true" className="w-8 h-8" />

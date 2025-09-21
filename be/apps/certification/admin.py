@@ -1,6 +1,12 @@
 from django.contrib import admin
-from .models import Certification
+from .models import Certification, Provider
 from django.utils.html import format_html
+
+@admin.register(Provider)
+class ProviderAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
+
 
 @admin.register(Certification)
 class CertificationAdmin(admin.ModelAdmin):

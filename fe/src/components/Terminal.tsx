@@ -100,7 +100,7 @@ export const Terminal = ({ children, className }: TerminalProps) => {
   return (
     <div
       className={cn(
-        "z-0 h-full max-h-[400px] w-full max-w-xl rounded-2xl border border-gray-700 bg-slate-800/20",
+        "z-0 h-full max-h-[340px] w-full max-w-xl rounded-2xl border border-gray-700 bg-slate-800/20",
         className,
       )}
     >
