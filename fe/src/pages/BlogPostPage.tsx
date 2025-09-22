@@ -49,11 +49,13 @@ export default function BlogPostPage() {
           · {post.read_time} {post.read_time === 1 ? "min" : "mins"} read
         </div>
         <article
-          className="px-2 prose prose-neutral dark:prose-invert mt-12 text-md lg:text-lg
-                     [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:ml-10
-                     [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:ml-10
-                     [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-600
-                     dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-400"
+          className="prose prose-neutral dark:prose-invert mt-12 text-md lg:text-lg
+                     [&>ul]:list-disc [&>ul]:pl-2 lg:[&>ul]:pl-12 [&>ul]:ml-6
+                           [&>ol]:list-decimal [&>ol]:pl-2 lg:[&>ol]:pl-12 [&>ol]:ml-6
+                           [&>blockquote]:ml-2 lg:[&>blockquote]:ml-12 [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-secondary
+                           [&>p[style*='margin-left']]:ml-0 [&>p[style*='margin-left']]:pl-0
+                           lg:[&>p>img]:mx-auto
+                           dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-secondary text-neutral-secondary"
           dangerouslySetInnerHTML={{ __html: post.content_html }}
         />
       </div>

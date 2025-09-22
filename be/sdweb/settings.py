@@ -172,6 +172,9 @@ CKEDITOR_CONFIGS = {
 }
 
 
+CKEDITOR_UPLOAD_PATH = "blog_images/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
 
 # Email backend
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"

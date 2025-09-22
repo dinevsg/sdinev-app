@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import BlogPost
 import re
+from django.conf import settings
+
 
 # Function to convert plain-text numbered lists into HTML <ol>
 def text_to_html(text: str) -> str:
@@ -52,6 +54,7 @@ def text_to_html(text: str) -> str:
         flush_list()
         html.append(f"<p>{stripped}</p>")
 
+        
     flush_list()
     return ''.join(html)
 
@@ -83,4 +86,8 @@ class BlogPostSerializer(serializers.ModelSerializer):
         return obj.get_read_time()
 
     def get_content_html(self, obj):
-        return text_to_html(obj.content)
+        request = self.context.get("request")  # <-- safer
+        base_url = request.build_absolute_uri(settings.MEDIA_URL) if request else settings.MEDIA_URL
+        html = obj.content
+        html = html.replace('src="/media/', f'src="{base_url}')
+        return html

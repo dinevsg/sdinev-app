@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.urls import reverse
 import math
 from django.utils.html import strip_tags
@@ -31,7 +31,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True, blank=True)  # Slug for URL
     picture = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='blog_posts')
-    content = RichTextField()
+    content = RichTextUploadingField()
     published_at = models.DateTimeField(auto_now_add=True)
     published_by = models.CharField(max_length=255, default="S. Dinev")
 

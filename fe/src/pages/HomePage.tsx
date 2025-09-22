@@ -101,7 +101,7 @@ const Home: React.FC = () => {
           <div className="text-center">
             <h1 className="text-5xl font-bold tracking-tight xl:text-6xl">
               Aloha, <br />
-              <span className='font-normal text-3xl'>I'm </span><HyperText className='text-3xl' as="span">Stanislav Dinev</HyperText>
+              <span className='font-normal text-3xl xl:text-5xl'>I'm </span><HyperText className='text-3xl xl:text-5xl' as="span">Stanislav Dinev</HyperText>
             </h1>
             <p className="mt-8 text-md xl:text-lg text-neutral-secondary font-medium">
               A Data Engineer who loves to dive deep into the clouds. <br />

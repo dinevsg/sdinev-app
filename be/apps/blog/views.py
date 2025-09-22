@@ -1,17 +1,12 @@
-from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404
-from .models import BlogPost, Category
-from django.core import serializers
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from django.shortcuts import get_object_or_404
 from .models import BlogPost
 from .serializers import BlogPostSerializer
-from rest_framework import viewsets
 
 # all posts for /blog
 class AllBlogPostsAPIView(ListAPIView):
     queryset = BlogPost.objects.all().order_by('-published_at')
-    serializer_class = BlogPostSerializer
-
+    serializer_class = BlogPostSerializer  # <--- DRF handles context automatically
 
 # posts by category for /blog/category
 class CategoryPostsAPIView(ListAPIView):
@@ -36,9 +31,10 @@ class BlogPostDetailAPIView(RetrieveAPIView):
             slug=post_slug,
             category__slug=category_slug
         )
-    
+
+# latest posts
 class LatestBlogPostsAPIView(ListAPIView):
-    queryset = BlogPost.objects.order_by('-published_at')[:4]  # latest 4 posts
+    queryset = BlogPost.objects.order_by('-published_at')[:4]
     serializer_class = BlogPostSerializer
 
     

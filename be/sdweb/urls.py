@@ -20,6 +20,7 @@ urlpatterns = [
     path('api/blog/', include('apps.blog.api_urls', namespace="blog")),
     path('api/projects/', include('apps.projects.api_urls', namespace="projects")),
     path("api/vanilla/", include("apps.vanilla.api_urls", namespace="vanilla")),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
 ]
 
