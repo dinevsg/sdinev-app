@@ -10,7 +10,7 @@ from .serializers import CertificationSerializer
 
 class CertificationListView(APIView):
     def get(self, request):
-        certifications = Certification.objects.all()
+        certifications = Certification.objects.all().order_by('-id')
         serializer = CertificationSerializer(certifications, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
