@@ -88,7 +88,7 @@ export default function ProjectsPage() {
                           href={project.github_link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex justify-center items-center gap-1 w-36 py-1 rounded-full bg-gray-700 text-neutral-main text-sm font-semibold hover:bg-indigo-500 transition"
+                          className="flex justify-center items-center gap-1 w-36 py-2 rounded-full bg-gray-700 text-neutral-main text-sm font-semibold hover:bg-indigo-500 transition"
                         >
                           GitHub <ExternalLink size={16} strokeWidth={2} />
                         </a>
