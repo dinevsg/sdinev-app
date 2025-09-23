@@ -83,7 +83,7 @@ export default function AboutSectionComponent() {
 //     </div>
 //     </section>
 <section className="py-2 xl:py-12">
-  <div className="mx-auto w-full px-6 lg:px-42 mb-12">
+  <div className="mx-auto w-full px-6 lg:px-24 mb-12">
     {/* Heading */}
     <div className="max-w-7xl mx-auto py-8 sm:py-12 sm:text-center">
       <p className="mt-1 text-4xl font-bold text-neutral-main sm:text-5xl sm:tracking-tight lg:text-6xl">
