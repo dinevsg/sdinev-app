@@ -156,6 +156,10 @@ CKEDITOR_CONFIGS = {
         "height": 400,
         "width": "100%",
         "extraPlugins": "uploadimage, liststyle, indentblock, colorbutton, font",
+        "wordcount": {
+            "showCharCount": True,
+            "maxCharCount": 430
+        },  
         "toolbar_Full": [
             {"name": "clipboard", "items": ["Undo", "Redo"]},
             {"name": "styles", "items": ["Format", "Font", "FontSize"]},

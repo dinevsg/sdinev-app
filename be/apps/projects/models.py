@@ -3,11 +3,13 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from taggit.managers import TaggableManager
 from django.core.exceptions import ValidationError
+from django.utils.html import strip_tags
 
 
 
 def validate_max_430(value):
-    if len(value) > 430:
+    plain_text = strip_tags(value)
+    if len(plain_text) > 430:
         raise ValidationError("Description cannot exceed 430 characters.")
 
 # Create your models here.
