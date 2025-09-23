@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'rest_framework',
     'corsheaders',
+    'storages',
 
     'apps.certification',
     'apps.blog',
@@ -58,7 +59,6 @@ ROOT_URLCONF = 'sdweb.urls'
 CORS_ALLOWED_ORIGINS = [
     origin.strip() for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 ]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -186,3 +186,12 @@ ANYMAIL = {
 }
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 EMAIL_TIMEOUT = 10
+
+
+# Use Supabase (S3) as default storage
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ.get("SUPABASE_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = os.environ.get("SUPABASE_SECRET_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("SUPABASE_BUCKET_NAME")
+AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1"
+AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private

@@ -22,6 +22,8 @@ psycopg2-binary = "^2.9.10"
 python-dotenv = "^1.1.1"
 sendgrid = "^6.12.4"
 django-anymail = "^13.1"
+django-storages = "^1.14.6"
+boto3 = "^1.40.37"
 
 [tool.poetry.dev-dependencies]
 # add dev dependencies if needed
