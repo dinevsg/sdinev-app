@@ -144,7 +144,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AWS_ACCESS_KEY_ID = os.environ.get("SUPABASE_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY = os.environ.get("SUPABASE_SECRET_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("SUPABASE_BUCKET_NAME")
-AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/s3"
+AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/"
 AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # media_url could be removed if using only S3
