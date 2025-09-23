@@ -104,8 +104,8 @@ const Home: React.FC = () => {
               <span className='font-normal text-3xl xl:text-5xl'>I'm </span><HyperText className='text-3xl xl:text-5xl' as="span">Stanislav Dinev</HyperText>
             </h1>
             <p className="mt-8 text-md xl:text-lg text-neutral-secondary font-medium">
-              A Data Engineer who loves to dive deep into the clouds. <br />
-              Constantly learning and pushing boundaries to stay ahead in the ever-changing world of technology.
+              A Data Engineer who loves to dive deep into the clouds<br />
+              Constantly learning and pushing boundaries to stay ahead in the ever-changing world of technology
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/projects" className="rounded-2xl w-full sm:w-44 bg-indigo-600 hover:bg-indigo-500  px-7 py-3 text-md font-medium shadow-xl transition">
