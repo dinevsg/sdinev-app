@@ -148,7 +148,7 @@ AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1"
 AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private
 
 # media_url could be removed if using only S3
-MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/"
+MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/object/public/{AWS_STORAGE_BUCKET_NAME}/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
