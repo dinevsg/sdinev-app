@@ -55,11 +55,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sdweb.urls'
 
-CORS_ALLOWED_ORIGINS = [
-    "https://fe-4t37w.ondigitalocean.app", # DigitalOcean App Platform
-    "http://localhost:5173", # React dev server
-]
-
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(", ")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
