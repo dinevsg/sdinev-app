@@ -103,7 +103,7 @@ export default function BlogCategoryPage() {
         )}
 
         {otherPosts.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 xl:gap-6 pt-6 mb-12 xl:mb-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 xl:gap-6 pt-6 mb-12">
             {otherPosts.map((post) => (
               <div key={post.id} className="flex group flex-col h-full">
                 <Link to={`/blog/${post.category_slug}/${post.slug}`}>

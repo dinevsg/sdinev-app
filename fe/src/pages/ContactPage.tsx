@@ -83,7 +83,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="mx-auto w-full max-w-5xl mb-16 xl:mb-4">
+        <div className="mx-auto w-full max-w-5xl mb-12">
           <form onSubmit={handleSubmit} className="-mx-4 flex flex-wrap lg:items-stretch">
             {/* LEFT: stacked inputs */}
             <div className="w-full px-4 lg:w-1/3 flex flex-col gap-y-4">
