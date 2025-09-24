@@ -137,16 +137,32 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Use Supabase (S3) as default storage
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# # Use Supabase (S3) as default storage
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get("SUPABASE_ACCESS_KEY")
-AWS_SECRET_ACCESS_KEY = os.environ.get("SUPABASE_SECRET_KEY")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("SUPABASE_BUCKET_NAME")
-AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.storage.supabase.co/storage/v1/s3"
-AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private
+# AWS_ACCESS_KEY_ID = os.environ.get("SUPABASE_ACCESS_KEY")
+# AWS_SECRET_ACCESS_KEY = os.environ.get("SUPABASE_SECRET_KEY")
+# AWS_STORAGE_BUCKET_NAME = os.environ.get("SUPABASE_BUCKET_NAME")
+# AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.storage.supabase.co/storage/v1/s3"
+# AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
+            "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
+            "bucket_name": os.environ.get("SUPABASE_S3_BUCKET_NAME"),
+            "region_name": os.environ.get("SUPABASE_S3_REGION_NAME"),
+            "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
+        },
+    },
+}
 
 # media_url could be removed if using only S3
 MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}/"
