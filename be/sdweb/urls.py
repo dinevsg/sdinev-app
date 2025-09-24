@@ -28,10 +28,10 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
-else:
-# Production: Let Whitenoise serve media files
-    from django.views.static import serve
+# else:
+# # Production: Let Whitenoise serve media files
+#     from django.views.static import serve
 
-    urlpatterns += [
-        path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
-    ]
+#     urlpatterns += [
+#         path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
+#     ]
