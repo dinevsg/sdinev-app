@@ -148,22 +148,22 @@ STATICFILES_DIRS = [
 # AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.storage.supabase.co/storage/v1/s3"
 # AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private
 
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage" if DEBUG else "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-   "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage" if DEBUG else "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+#    "default": {
+#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         
-        "OPTIONS": {
-            "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
-            "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
-            "bucket_name": os.environ.get("SUPABASE_S3_BUCKET_NAME"),
-            "region_name": os.environ.get("SUPABASE_S3_REGION_NAME"),
-            "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
-        },
-    },
-}
+#         "OPTIONS": {
+#             "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
+#             "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
+#             "bucket_name": os.environ.get("SUPABASE_S3_BUCKET_NAME"),
+#             "region_name": os.environ.get("SUPABASE_S3_REGION_NAME"),
+#             "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
+#         },
+#     },
+# }
 
 
 # STORAGES = {
@@ -193,14 +193,14 @@ STORAGES = {
 # MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/sdinev-media/"
 # MEDIA_ROOT = BASE_DIR / 'media'
 
-if DEBUG:
-    # Local dev
-    MEDIA_ROOT = BASE_DIR / "media"
-    MEDIA_URL = "/media/"
-else:
-    # Production (Supabase S3)
-    MEDIA_ROOT = None  # not used
-    MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/sdinev-media/"
+# if DEBUG:
+#     # Local dev
+#     MEDIA_ROOT = BASE_DIR / "media"
+#     MEDIA_URL = "/media/"
+# else:
+#     # Production (Supabase S3)
+#     MEDIA_ROOT = None  # not used
+#     MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/sdinev-media/"
 
 # -------------------------------
 
@@ -300,3 +300,73 @@ ANYMAIL = {
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 EMAIL_TIMEOUT = 10
 
+
+
+
+
+# ======================
+# Media files
+# ======================
+if DEBUG:
+    # Local dev
+    MEDIA_ROOT = BASE_DIR / "media"
+    MEDIA_URL = "/media/"
+    DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+    # STORAGES dict for dev (no S3 options)
+    STORAGES = {
+        "default": {"BACKEND": DEFAULT_FILE_STORAGE},
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
+        },
+    }
+else:
+    # Production → Supabase S3
+    AWS_ACCESS_KEY_ID = os.environ["SUPABASE_S3_ACCESS_KEY_ID"]
+    AWS_SECRET_ACCESS_KEY = os.environ["SUPABASE_S3_SECRET_ACCESS_KEY"]
+    AWS_STORAGE_BUCKET_NAME = os.environ["SUPABASE_S3_BUCKET_NAME"]
+    AWS_S3_REGION_NAME = os.environ["SUPABASE_S3_REGION_NAME"]
+    AWS_S3_ENDPOINT_URL = os.environ["SUPABASE_S3_ENDPOINT_URL"]
+    AWS_QUERYSTRING_AUTH = False
+
+    MEDIA_ROOT = None  # not used in prod
+    MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}/"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+    # STORAGES dict for prod
+    STORAGES = {
+        "default": {
+            "BACKEND": DEFAULT_FILE_STORAGE,
+            "OPTIONS": {
+                "access_key": AWS_ACCESS_KEY_ID,
+                "secret_key": AWS_SECRET_ACCESS_KEY,
+                "bucket_name": AWS_STORAGE_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+                "endpoint_url": AWS_S3_ENDPOINT_URL,
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        },
+    }
+
+# ======================
+# Static files
+# ======================
+STATIC_URL = "/static/"
+
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / "static"]  # dev static folder
+else:
+    STATIC_ROOT = BASE_DIR / "staticfiles"  # production
+
+# ======================
+# Serve media in dev
+# ======================
+if DEBUG:
+    from django.conf import settings
+    from django.conf.urls.static import static
+
+    urlpatterns = [
+        # your other URLs here
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+      + static(settings.STATIC_URL, document_root=BASE_DIR / "static")
