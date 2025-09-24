@@ -153,7 +153,7 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
     "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         "OPTIONS": {
             "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
             "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
@@ -165,7 +165,7 @@ STORAGES = {
 }
 
 # media_url could be removed if using only S3
-MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}/"
+MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/sdinev-media/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
