@@ -201,7 +201,7 @@ if DEBUG:
 else:
     # Production (Supabase S3)
     MEDIA_ROOT = None  # not used
-    MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/{SUPABASE_S3_BUCKET_NAME}/"
+    MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/sdinev-media/"
 
 
 # Default primary key field type
