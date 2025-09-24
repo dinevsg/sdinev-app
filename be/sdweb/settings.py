@@ -148,44 +148,46 @@ STATICFILES_DIRS = [
 # AWS_S3_ENDPOINT_URL = "https://tlveapgzoxcunhpwzxup.storage.supabase.co/storage/v1/s3"
 # AWS_QUERYSTRING_AUTH = False  # Set True if bucket is private
 
-# STORAGES = {
-#     "staticfiles": {
-#         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-#     },
-#     "default": {
-#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-#         "OPTIONS": {
-#             "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
-#             "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
-#             "bucket_name": os.environ.get("SUPABASE_S3_BUCKET_NAME"),
-#             "region_name": os.environ.get("SUPABASE_S3_REGION_NAME"),
-#             "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
-#         },
-#     },
-# }
-
-
 STORAGES = {
-    # Default storage → Supabase S3 (via django-storages)
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage"
-        # if DEBUG
-        # else "storages.backends.s3boto3.S3Boto3Storage",
-    },
-    # Static files
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
-        if DEBUG
-        else "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        # if DEBUG
+#         # else "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
+            "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
+            "bucket_name": os.environ.get("SUPABASE_S3_BUCKET_NAME"),
+            "region_name": os.environ.get("SUPABASE_S3_REGION_NAME"),
+            "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
+        },
     },
 }
 
-AWS_ACCESS_KEY_ID = os.environ.get("SUPABASE_S3_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("SUPABASE_S3_BUCKET_NAME")
-AWS_S3_REGION_NAME = os.environ.get("SUPABASE_S3_REGION_NAME")
-AWS_S3_ENDPOINT_URL = os.environ.get("SUPABASE_S3_ENDPOINT_URL")
-AWS_QUERYSTRING_AUTH = False  # Set True if your bucket is private
+
+# STORAGES = {
+#     # Default storage → Supabase S3 (via django-storages)
+#     "default": {
+#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage"
+#         # if DEBUG
+#         # else "storages.backends.s3boto3.S3Boto3Storage",
+#     },
+#     # Static files
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
+#         if DEBUG
+#         else "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+# AWS_ACCESS_KEY_ID = os.environ.get("SUPABASE_S3_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = os.environ.get("SUPABASE_S3_BUCKET_NAME")
+# AWS_S3_REGION_NAME = os.environ.get("SUPABASE_S3_REGION_NAME")
+# AWS_S3_ENDPOINT_URL = os.environ.get("SUPABASE_S3_ENDPOINT_URL")
+# AWS_QUERYSTRING_AUTH = False  # Set True if your bucket is private
 
 
 # media_url could be removed if using only S3
