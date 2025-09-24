@@ -168,9 +168,9 @@ STATICFILES_DIRS = [
 STORAGES = {
     # Default storage → Supabase S3 (via django-storages)
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage"
-        if DEBUG
-        else "storages.backends.s3boto3.S3Boto3Storage",
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage"
+        # if DEBUG
+        # else "storages.backends.s3boto3.S3Boto3Storage",
     },
     # Static files
     "staticfiles": {
