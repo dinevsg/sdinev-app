@@ -132,11 +132,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # # Use Supabase (S3) as default storage
@@ -305,68 +305,57 @@ EMAIL_TIMEOUT = 10
 
 
 # ======================
-# Media files
+# Media and Static Files Configuration
 # ======================
-if DEBUG:
-    # Local dev
-    MEDIA_ROOT = BASE_DIR / "media"
-    MEDIA_URL = "/media/"
-    DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-    # STORAGES dict for dev (no S3 options)
-    STORAGES = {
-        "default": {"BACKEND": DEFAULT_FILE_STORAGE},
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
-        },
-    }
-else:
-    # Production → Supabase S3
-    AWS_ACCESS_KEY_ID = os.environ["SUPABASE_S3_ACCESS_KEY_ID"]
-    AWS_SECRET_ACCESS_KEY = os.environ["SUPABASE_S3_SECRET_ACCESS_KEY"]
-    AWS_STORAGE_BUCKET_NAME = os.environ["SUPABASE_S3_BUCKET_NAME"]
-    AWS_S3_REGION_NAME = os.environ["SUPABASE_S3_REGION_NAME"]
-    AWS_S3_ENDPOINT_URL = os.environ["SUPABASE_S3_ENDPOINT_URL"]
-    AWS_QUERYSTRING_AUTH = False
 
-    MEDIA_ROOT = None  # not used in prod
-    MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}/"
-    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-    # STORAGES dict for prod
-    STORAGES = {
-        "default": {
-            "BACKEND": DEFAULT_FILE_STORAGE,
-            "OPTIONS": {
-                "access_key": AWS_ACCESS_KEY_ID,
-                "secret_key": AWS_SECRET_ACCESS_KEY,
-                "bucket_name": AWS_STORAGE_BUCKET_NAME,
-                "region_name": AWS_S3_REGION_NAME,
-                "endpoint_url": AWS_S3_ENDPOINT_URL,
-            },
-        },
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
-        },
-    }
-
-# ======================
-# Static files
-# ======================
+# Static files configuration
 STATIC_URL = "/static/"
 
 if DEBUG:
-    STATICFILES_DIRS = [BASE_DIR / "static"]  # dev static folder
+    # Development static files
+    STATICFILES_DIRS = [BASE_DIR / "static"]
 else:
-    STATIC_ROOT = BASE_DIR / "staticfiles"  # production
+    # Production static files
+    STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# ======================
-# Serve media in dev
-# ======================
+# Media files configuration
 if DEBUG:
-    from django.conf import settings
-    from django.conf.urls.static import static
+    # Development media files
+    MEDIA_ROOT = BASE_DIR / "media" 
+    MEDIA_URL = "/media/"
+else:
+    # Production media files (Supabase S3)
+    MEDIA_ROOT = None  # not used in production
+    MEDIA_URL = f"https://tlveapgzoxcunhpwzxup.supabase.co/storage/v1/object/public/sdinev-media/"
 
-    urlpatterns = [
-        # your other URLs here
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
-      + static(settings.STATIC_URL, document_root=BASE_DIR / "static")
+# STORAGES configuration (modern approach)
+if DEBUG:
+    # Development configuration
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {
+                "location": MEDIA_ROOT,
+            },
+        },
+    }
+else:
+    # Production configuration
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
+                "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
+                "bucket_name": os.environ.get("SUPABASE_S3_BUCKET_NAME"),
+                "region_name": os.environ.get("SUPABASE_S3_REGION_NAME"),
+                "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
+            },
+        },
+    }
