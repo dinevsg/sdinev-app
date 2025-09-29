@@ -2,17 +2,10 @@ from rest_framework import serializers
 from .models import BlogPost
 import re
 from django.conf import settings
-
+from bs4 import BeautifulSoup
 
 # Function to convert plain-text numbered lists into HTML <ol>
 def text_to_html(text: str) -> str:
-    """
-    Converts plain-text editor content into HTML:
-    - Numbered lists (1., 2., 3.)
-    - Bulleted lists (-, *)
-    - Paragraphs
-    - Preserves line breaks
-    """
     lines = text.splitlines()
     html = []
     list_buffer = []
@@ -54,16 +47,35 @@ def text_to_html(text: str) -> str:
         flush_list()
         html.append(f"<p>{stripped}</p>")
 
-        
     flush_list()
     return ''.join(html)
+
+
+def clean_blog_html(html_content):
+    from bs4 import BeautifulSoup
+
+    soup = BeautifulSoup(html_content, "html.parser")
+
+    for heading in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]):
+        if heading.has_attr("style"):
+            del heading["style"]
+        # Completely unwrap all children tags (strong, span, etc.)
+        for child in heading.find_all(True):
+            child.unwrap()
+
+    # Remove styles from <p>
+    for p in soup.find_all("p"):
+        if p.has_attr("style"):
+            del p["style"]
+
+    return str(soup)
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField()
     read_time = serializers.SerializerMethodField()
     category_slug = serializers.CharField(source='category.slug', read_only=True)
-    content_html = serializers.SerializerMethodField()  # only once
+    content_html = serializers.SerializerMethodField()  # cleaned HTML
 
     class Meta:
         model = BlogPost
@@ -86,8 +98,10 @@ class BlogPostSerializer(serializers.ModelSerializer):
         return obj.get_read_time()
 
     def get_content_html(self, obj):
-        request = self.context.get("request")  # <-- safer
+        request = self.context.get("request")
         base_url = request.build_absolute_uri(settings.MEDIA_URL) if request else settings.MEDIA_URL
         html = obj.content
         html = html.replace('src="/media/', f'src="{base_url}')
+        # Clean headings and paragraphs
+        html = clean_blog_html(html)
         return html
