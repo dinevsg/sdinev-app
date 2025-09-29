@@ -52,18 +52,34 @@ def text_to_html(text: str) -> str:
 
 
 def clean_blog_html(html_content):
-    from bs4 import BeautifulSoup
-
     soup = BeautifulSoup(html_content, "html.parser")
 
+    # Clean headings
     for heading in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]):
         if heading.has_attr("style"):
             del heading["style"]
-        # Completely unwrap all children tags (strong, span, etc.)
-        for child in heading.find_all(True):
-            child.unwrap()
 
-    # Remove styles from <p>
+        for child in heading.find_all(True):
+            # Convert <span style="font-weight:bold"> → <strong>
+            if child.name == "span" and "font-weight:bold" in (child.get("style") or ""):
+                child.name = "strong"
+                del child["style"]
+
+            # Convert <span style="font-style:italic"> → <em>
+            elif child.name == "span" and "font-style:italic" in (child.get("style") or ""):
+                child.name = "em"
+                del child["style"]
+
+            # Convert <span style="text-decoration:underline"> → <u>
+            elif child.name == "span" and "underline" in (child.get("style") or ""):
+                child.name = "u"
+                del child["style"]
+
+            # If style exists but not a font style, just drop it
+            elif child.has_attr("style"):
+                del child["style"]
+
+    # Clean <p>
     for p in soup.find_all("p"):
         if p.has_attr("style"):
             del p["style"]

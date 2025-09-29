@@ -103,11 +103,13 @@ export default function AboutSectionComponent() {
           dangerouslySetInnerHTML={{ __html: about.title }}
         />
         <article
-          className="rose prose-neutral dark:prose-invert text-md lg:text-md
-                     [&>ul]:list-disc [&>ul]:pl-2 [&>ul]:ml-6
-                     [&>ol]:list-decimal [&>ol]:pl-2 [&>ol]:ml-6
-                     [&>blockquote]:ml-2 [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-secondary
-                     dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-secondary text-neutral-secondary"
+          className="prose prose-lg prose-neutral dark:prose-invert
+                     [&>ul]:list-disc [&>ul]:pl-2 lg:[&>ul]:pl-12 [&>ul]:ml-6
+                           [&>ol]:list-decimal [&>ol]:pl-2 lg:[&>ol]:pl-12 [&>ol]:ml-6
+                           [&>blockquote]:ml-2 lg:[&>blockquote]:ml-12 [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-secondary
+                           [&>p[style*='margin-left']]:ml-0 [&>p[style*='margin-left']]:pl-0
+                           lg:[&>p>img]:mx-auto
+                           dark:[&>blockquote]:border-neutral-600 dark:[&>blockquote]:text-neutral-secondary text-neutral-secondary"
           dangerouslySetInnerHTML={{ __html: about.content }}
         />
       </div>

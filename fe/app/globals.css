@@ -43,6 +43,17 @@ body {
   syntax: '<angle>';
 }
 
+h1 {
+  @apply text-4xl font-extrabold leading-tight;
+}
+
+h2 {
+  @apply text-3xl font-bold leading-snug;
+}
+
+h3 {
+  @apply text-2xl font-semibold leading-snug;
+}
 
 @keyframes spin-border {
   from {
