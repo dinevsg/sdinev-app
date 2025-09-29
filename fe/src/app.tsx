@@ -27,7 +27,7 @@ export default function App() {
             <Route path="/certifications" element={<CertificationsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
-             Catch-all 404 route
+             {/* Catch-all 404 route */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

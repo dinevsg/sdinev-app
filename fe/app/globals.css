@@ -43,15 +43,16 @@ body {
   syntax: '<angle>';
 }
 
-h1 {
+/* app/globals.css or wherever your Tailwind is */
+.blog-content h1 {
   @apply text-4xl font-extrabold leading-tight;
 }
 
-h2 {
+.blog-content h2 {
   @apply text-3xl font-bold leading-snug;
 }
 
-h3 {
+.blog-content h3 {
   @apply text-2xl font-semibold leading-snug;
 }
 

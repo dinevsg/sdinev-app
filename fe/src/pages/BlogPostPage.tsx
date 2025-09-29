@@ -49,7 +49,7 @@ export default function BlogPostPage() {
           · {post.read_time} {post.read_time === 1 ? "min" : "mins"} read
         </div>
         <article
-          className="prose prose-lg prose-neutral dark:prose-invert mt-12 
+          className="prose prose-lg prose-neutral dark:prose-invert mt-12 blog-content
                      [&>ul]:list-disc [&>ul]:pl-2 lg:[&>ul]:pl-12 [&>ul]:ml-6
                            [&>ol]:list-decimal [&>ol]:pl-2 lg:[&>ol]:pl-12 [&>ol]:ml-6
                            [&>blockquote]:ml-2 lg:[&>blockquote]:ml-12 [&>blockquote]:border-l-4 [&>blockquote]:border-neutral-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-secondary
